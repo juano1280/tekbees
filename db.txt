@@ -1,0 +1,37 @@
+CREATE TABLE categoria(
+id_categoria INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+nom_categoria VARCHAR(20),
+desc_categoria VARCHAR(50));
+CREATE TABLE ciudad(
+id_ciudad INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+nom_ciudad VARCHAR(30));
+
+CREATE TABLE producto(
+cod_barras_producto VARCHAR(13) PRIMARY KEY,
+nom_producto VARCHAR(20),
+desc_producto VARCHAR(50),
+precio_producto DECIMAL(6, 2),
+cant_stock_producto INTEGER,
+id_categoria INTEGER);
+
+ALTER TABLE APP.PRODUCTO
+ADD FOREIGN KEY (id_categoria)
+REFERENCES APP.CATEGORIA(id_categoria);
+
+CREATE TABLE ciudad(
+id_ciudad INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+nom_ciudad VARCHAR(30));
+
+CREATE TABLE cliente(
+id_tipo_identificacion VARCHAR(2),
+num_identificacion VARCHAR(13),
+nom_cliente VARCHAR(30),
+ape_cliente VARCHAR(30),
+dir_cliente VARCHAR(30),
+email_cliente VARCHAR(50),
+id_ciudad INTEGER,
+PRIMARY KEY (id_tipo_identificacion, num_identificacion));
+
+ALTER TABLE APP.CLIENTE
+ADD FOREIGN KEY (id_ciudad)
+REFERENCES APP.CIUDAD(id_ciudad);
